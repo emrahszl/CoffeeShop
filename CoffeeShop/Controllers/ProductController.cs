@@ -17,10 +17,6 @@ namespace CoffeeShop.Controllers
             return View(await _httpClient.GetFromJsonAsync<List<Product>>("https://localhost:7142/api/Products"));
         }
 
-        //[Authorize(Roles = "Admin")]
-        public IActionResult Store()
-        {
-            return View();
-        }
+        
     }
 }
