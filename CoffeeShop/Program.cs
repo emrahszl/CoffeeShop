@@ -3,13 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using CoffeeShop.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
-var userConnnectionString = builder.Configuration.GetConnectionString("ApplicationUserDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationUserDbContextConnection' not found.");
-var productConnectionString = builder.Configuration.GetConnectionString("ProductDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ProductDbContextConnection' not found.");
-
-builder.Services.AddDbContext<ApplicationUserDbContext>(options => options.UseSqlServer(userConnnectionString));
-builder.Services.AddDbContext<ProductDbContext>(options => options.UseSqlServer(productConnectionString));
-
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationUserDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -32,6 +25,11 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+
+app.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",
