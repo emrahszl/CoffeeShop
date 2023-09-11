@@ -10985,7 +10985,7 @@ p {
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1000px) {
   .product-item .product-item-title {
     position: relative;
     z-index: 1;
